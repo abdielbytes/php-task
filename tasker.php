@@ -25,3 +25,14 @@ function addTask($description)
 if ($argc < 2) {
     echo "Usage: php tasker.php <command> [options]\n";
 }
+
+$command = $argv[1];
+switch ($command) {
+    case 'add':
+        if(isset($argv[2])) {
+            addTask($argv[2]);
+        } else {
+            echo "Usage: php tasker.php add <description>\n>";
+        }
+        break;
+}
