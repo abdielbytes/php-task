@@ -13,10 +13,25 @@ function loadTasks()
     return is_array ($tasks) ? $tasks : [];
 }
 
+function saveTasks($tasks)
+{
+    file_put_contents(TASKS_FILE, json_encode($tasks, JSON_PRETTY_PRINT));
+}
+
 function addTask($description)
 {
     $tasks = loadTasks();
-
+    $taskId = count ($tasks) + 1;
+    $tasks = [
+        "id" => $taskId,
+        "description" => $description,
+        "status" => "todo",
+        "createdAt" => date("Y-m-d H:i:s", time()),
+        "updatedAt" => date("Y-m-d H:i:s", time())
+    ];
+    $tasks[] = $tasks;
+    saveTasks($tasks);
+    echo "Task added successfully (ID: $taskId)\n";
 }
 
 
